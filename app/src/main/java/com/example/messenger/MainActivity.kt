@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
 
             Log.d("MainActivity", "Email is" +  email)
             Log.d("MainActivity", "Password is $password")
+
+            //========firebase auth to perform create user with email and password====
         }
 
         already_have_account_text_view.setOnClickListener {
