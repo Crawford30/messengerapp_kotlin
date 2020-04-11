@@ -3,6 +3,7 @@ package com.example.messenger
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
@@ -40,8 +41,15 @@ class LoginActivity: AppCompatActivity() {
             val email = email_login.text.toString()
             val password = password_login.text.toString()
 
-            //========firebase auth====
+        if (email.isEmpty() || password.isEmpty()) {
+            
+             // checks for email and password text field to make sure they are not empty
+            Toast.makeText(this, "Please Enter Email Address and Password", Toast.LENGTH_LONG).show()
+            return
 
+        }
+
+            //========firebase auth====
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
                     if (!it.isSuccessful) return@addOnCompleteListener
