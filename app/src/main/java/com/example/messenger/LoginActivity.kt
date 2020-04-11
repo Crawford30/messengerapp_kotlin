@@ -42,7 +42,7 @@ class LoginActivity: AppCompatActivity() {
             val password = password_login.text.toString()
 
         if (email.isEmpty() || password.isEmpty()) {
-            
+
              // checks for email and password text field to make sure they are not empty
             Toast.makeText(this, "Please Enter Email Address and Password", Toast.LENGTH_LONG).show()
             return
