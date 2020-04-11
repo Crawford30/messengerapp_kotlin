@@ -15,21 +15,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         register_button_register.setOnClickListener {
-
            performRegister()
+
         }
 
         already_have_account_text_view.setOnClickListener {
             Log.d("MainActivity", "Try to show login activity")
-            ///====launch the log in activity
 
+            ///====launch the log in activity
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
     }
 
     private  fun performRegister() {
-
 
         val email = email_edittext_register.text.toString()
         val password = password_edittext_register.text.toString()

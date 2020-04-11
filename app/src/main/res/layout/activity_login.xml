@@ -5,10 +5,9 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_dark">
+    android:background="@android:color/holo_green_light">
 
     <EditText
-        android:paddingLeft="10dp"
         android:id="@+id/email_login"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -17,10 +16,11 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:background="@android:color/white"
+        android:background="@drawable/rounded_edittext_register_login"
         android:ems="10"
         android:hint="Enter email"
         android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.707"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
-        android:background="@android:color/white"
+        android:background="@drawable/rounded_edittext_register_login"
         android:ems="10"
         android:hint="Enter password"
         android:inputType="textPassword"
@@ -45,9 +45,12 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/rounded_button"
         android:text="Login"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/password_login"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/password_login"
         app:layout_constraintTop_toBottomOf="@+id/password_login" />
 
@@ -56,11 +59,13 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
-        android:textSize="16sp"
+        android:gravity="center_horizontal"
+
         android:text="Back to Register"
-        android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/button_login"
         app:layout_constraintStart_toStartOf="@+id/button_login"
         app:layout_constraintTop_toBottomOf="@+id/button_login" />

@@ -12,6 +12,7 @@ class LoginActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         //======setting view for the activity=====
         setContentView(R.layout.activity_login)
 
