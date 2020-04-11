@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
+//=============================Shows Login account on already have an account textview tapped===
         already_have_account_text_view.setOnClickListener {
             Log.d("MainActivity", "Try to show login activity")
 

@@ -16,7 +16,26 @@ class LoginActivity: AppCompatActivity() {
         //======setting view for the activity=====
         setContentView(R.layout.activity_login)
 
-        login_text_view.setOnClickListener {
+        //calling fun to perform login
+        button_login.setOnClickListener {
+            performLogin()
+        }
+
+        //=========on Back to login text view clicked
+
+        back_to_register_text_view.setOnClickListener {
+
+            ///====launch the login activity
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+    }
+
+
+
+
+    private  fun performLogin() {
 
             val email = email_login.text.toString()
             val password = password_login.text.toString()
@@ -33,12 +52,5 @@ class LoginActivity: AppCompatActivity() {
                     Log.d("Login", "Failed to Login ${it.message}")
                 }
 
-
-
-
-            ///====launch the login activity
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
     }
 }
