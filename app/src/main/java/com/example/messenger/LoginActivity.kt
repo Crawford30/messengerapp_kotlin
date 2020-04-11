@@ -27,7 +27,7 @@ class LoginActivity: AppCompatActivity() {
         back_to_register_text_view.setOnClickListener {
 
             ///====launch the login activity
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
 

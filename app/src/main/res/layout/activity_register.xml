@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/holo_green_light"
-    tools:context=".MainActivity">
+    tools:context=".RegisterActivity">
 
 
     <Button
-        android:id="@+id/register_profile_button"
+        android:id="@+id/selectphoto_register_button"
         android:layout_width="117dp"
         android:layout_height="129dp"
 
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_profile_button" />
+        app:layout_constraintTop_toBottomOf="@+id/selectphoto_register_button" />
 
 
     <EditText
