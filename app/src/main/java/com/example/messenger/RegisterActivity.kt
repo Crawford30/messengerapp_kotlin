@@ -112,6 +112,10 @@ var selectedPhotoUri: Uri? = null  //global variable, because we need to access 
                 //else if successfull
                 Log.d("Main", "successfully created user with the UId: ${it.result?.user?.uid}")
 
+
+                //Then we store image to firebase
+                uploadImageToFirebaseStorage()
+
             }
             .addOnFailureListener {
                 Log.d("Main", "Failed to create user ${it.message}")
@@ -120,4 +124,14 @@ var selectedPhotoUri: Uri? = null  //global variable, because we need to access 
 
 
     }
+
+
+    //fun to upload image to firebase
+    private fun uploadImageToFirebaseStorage() {
+
+
+    }
+
+
+
 }
