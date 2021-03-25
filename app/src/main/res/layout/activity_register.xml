@@ -10,8 +10,8 @@
 
     <Button
         android:id="@+id/selectphoto_register_button"
-        android:layout_width="117dp"
-        android:layout_height="129dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
 
         android:layout_marginTop="40dp"
         android:background="@drawable/rounded_image_button"
@@ -22,6 +22,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/select_photo_imageview_register"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:civ_border_width="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/selectphoto_register_button"
+        app:layout_constraintEnd_toEndOf="@+id/selectphoto_register_button"
+        app:layout_constraintHorizontal_bias="0.265"
+        app:layout_constraintStart_toStartOf="@+id/selectphoto_register_button"
+        app:layout_constraintTop_toTopOf="@+id/selectphoto_register_button" />
 
     <EditText
         android:id="@+id/user_edittext_register"
@@ -98,6 +109,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_edittext_register" />
+    
+
 
     <TextView
         android:id="@+id/already_have_account_text_view"

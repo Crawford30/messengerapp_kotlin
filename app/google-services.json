@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "445185826889",
-    "firebase_url": "https://kotlinmessenger-efc4d.firebaseio.com",
-    "project_id": "kotlinmessenger-efc4d",
-    "storage_bucket": "kotlinmessenger-efc4d.appspot.com"
+    "project_number": "565065804891",
+    "project_id": "messenger-app-efed2",
+    "storage_bucket": "messenger-app-efed2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:445185826889:android:70f9f08c3ce029074bdf98",
+        "mobilesdk_app_id": "1:565065804891:android:9a760b1419916691c8a37e",
         "android_client_info": {
           "package_name": "com.example.messenger"
         }
       },
       "oauth_client": [
         {
-          "client_id": "445185826889-l910amnl6o4ddssf0dp9h5ch88lhgipr.apps.googleusercontent.com",
+          "client_id": "565065804891-0ghorn8c4u82prb30gt8k77cgsjeqapb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAi1qJbIWvIwQlVUyoqFsiYCZBW-K4gXlc"
+          "current_key": "AIzaSyA7IncxYESwjl_aeZxPR95KO1f3M5YUvnM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "445185826889-l910amnl6o4ddssf0dp9h5ch88lhgipr.apps.googleusercontent.com",
+              "client_id": "565065804891-0ghorn8c4u82prb30gt8k77cgsjeqapb.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
