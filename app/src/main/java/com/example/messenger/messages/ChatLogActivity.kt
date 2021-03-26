@@ -2,19 +2,42 @@ package com.example.messenger.messages
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.NewMessageActivity
 import com.example.messenger.R
+import com.example.messenger.models.ChatMessage
 import com.example.messenger.models.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.activity_chat_log.*
+import kotlinx.android.synthetic.main.chat_from_row.view.*
+import kotlinx.android.synthetic.main.chat_to_row.view.*
 
 class ChatLogActivity : AppCompatActivity() {
+
+
+    //===static constant ===
+    companion object{
+        val TAG = "ChatLog"
+
+    }
+
+    val adapter = GroupAdapter<GroupieViewHolder>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
+
+        recyclerview_chat_log.adapter = adapter
 
         //supportActionBar?.title = "Chat Log"
         //get the name
@@ -25,22 +48,118 @@ class ChatLogActivity : AppCompatActivity() {
 
         supportActionBar?.title = user.username
 
+        listensForMessages()
+
+        //setUpDummyData()
+
+
+        send_button_chat_log.setOnClickListener {
+            Log.d(TAG, "Attempt to Send message")
+            performSendMessage()
+        }
+
+
+    }
+
+
+
+    private fun listensForMessages() {
+        val ref = FirebaseDatabase.getInstance().getReference("/messages")
+
+
+            //Its more real time when we use  addChildEventListener
+        ref.addChildEventListener(object: ChildEventListener{
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+
+               val chatMessage =  snapshot.getValue(ChatMessage::class.java)
+
+                if(chatMessage != null) {
+
+                    Log.d(TAG, chatMessage?.text)
+
+                    //====add objects inside adapter
+                    adapter.add(ChatFromItem(chatMessage.text))
+
+                }
+
+
+            }
+
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+
+            }
+        })
+
+
+    }
+
+//    class ChatMessage(val id:String, val text: String, val fromId:String,val toId:String, val timeStamp:Long ){
+//        constructor(): this("","","","",-1)
+//
+//    }
+
+    private fun performSendMessage() {
+
+        val textMessage = edit_text_chat_log.text.toString()
+
+        val fromId  = FirebaseAuth.getInstance().uid
+        if (fromId == null) return
+
+
+        //elvis operator
+       // val fromId  = FirebaseAuth.getInstance().uid ?: return
+
+        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+        val toId = user.uid
+        //====How do we send message to firebase
+
+        //1. get firebase reference
+        val reference = FirebaseDatabase.getInstance().getReference("/messages").push() //to push will generate automatic node for us in rtd
+
+        val chatMessage = ChatMessage(reference.key!!, textMessage, fromId, toId!!, System.currentTimeMillis()/1000)
+        //2. Access the reference and set some value
+        reference.setValue(chatMessage).
+                addOnSuccessListener {
+                    Log.d(TAG, "Our Chat Message Saved Successfully: ${reference.key}")
+                }
+    }
+
+
+    private fun setUpDummyData() {
         val adapter = GroupAdapter<GroupieViewHolder>()
 
-        adapter.add(ChatFromItem())
-        adapter.add(ChatToItem())
-        adapter.add(ChatFromItem())
-        adapter.add(ChatToItem())
-        adapter.add(ChatFromItem())
-        adapter.add(ChatToItem())
+        adapter.add(ChatFromItem("From message ......"))
+        adapter.add(ChatToItem("To message .....\nTo Message....."))
+        adapter.add(ChatFromItem("From message ......"))
+        adapter.add(ChatToItem("To message .....\nTo Message....."))
+        adapter.add(ChatFromItem("From message ......"))
+        adapter.add(ChatToItem("To message .....\nTo Message....."))
+
 
         recyclerview_chat_log.adapter = adapter
     }
 }
 
 
-class ChatFromItem: Item<GroupieViewHolder>() {
+class ChatFromItem(val text:String): Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+
+        //viewHolder.itemView.text_view_from_row.text = "From message..."
+
+        viewHolder.itemView.text_view_from_row.text = text
 
 
     }
@@ -52,10 +171,13 @@ class ChatFromItem: Item<GroupieViewHolder>() {
 }
 
 
-class ChatToItem: Item<GroupieViewHolder>() {
+class ChatToItem(val text: String): Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
+//        viewHolder.itemView.text_view_to_row.text = "This is to row text message that is longer..."
 
+
+        viewHolder.itemView.text_view_to_row.text =  text
     }
 
     override fun getLayout(): Int {
