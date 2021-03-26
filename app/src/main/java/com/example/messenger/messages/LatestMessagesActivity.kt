@@ -1,12 +1,14 @@
-package com.example.messenger
+package com.example.messenger.messages
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.example.messenger.NewMessageActivity
+import com.example.messenger.R
+import com.example.messenger.registerlogin.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 
 class LatestMessagesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +34,7 @@ class LatestMessagesActivity : AppCompatActivity() {
 
         if(uid == null) {
             //====user not logged in, redirect to register ====
-            val intent = Intent(this,RegisterActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             //clear all activities on the stack
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
 
@@ -46,7 +48,7 @@ class LatestMessagesActivity : AppCompatActivity() {
     when(item.itemId){
         R.id.menu_new_message -> {
 
-            val intent = Intent(this,NewMessageActivity::class.java)
+            val intent = Intent(this, NewMessageActivity::class.java)
             startActivity(intent)
 
 
@@ -57,7 +59,7 @@ class LatestMessagesActivity : AppCompatActivity() {
 
             FirebaseAuth.getInstance().signOut()
 
-            val intent = Intent(this,RegisterActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             //clear all activities on the stack
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)

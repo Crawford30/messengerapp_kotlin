@@ -1,10 +1,13 @@
 package com.example.messenger
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.messenger.messages.ChatLogActivity
+import com.example.messenger.models.User
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -22,7 +25,7 @@ class NewMessageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_new_message)
 
         //=====set the title====
-        supportActionBar?.title = "Select user"
+        supportActionBar?.title = "Select User"
 
         //====present a list of user inside recycler view===
 
@@ -51,6 +54,10 @@ class NewMessageActivity : AppCompatActivity() {
        // recyclerview_newmessage.layoutManager = LinearLayoutManager(this)
     }
 
+    companion object{
+        val USER_KEY = "USER_KEY"
+    }
+
 
     private fun fetchUser() {
 
@@ -68,7 +75,7 @@ class NewMessageActivity : AppCompatActivity() {
 
                     //=convert the value to user object
 
-                    val user = it.getValue(RegisterActivity.User::class.java)
+                    val user = it.getValue(User::class.java)
 
                     if(user != null) {
 
@@ -76,8 +83,20 @@ class NewMessageActivity : AppCompatActivity() {
 
                     }
 
+                }
 
+                //=====On item click listenner
+                adapter.setOnItemClickListener { item, view ->
 
+                   //=====casting as userItem to access the name
+                    val userItem = item as UserItem
+                    //the item refers to the actual row that is rendering==
+
+                    val intent = Intent(view.context, ChatLogActivity::class.java)
+                    //intent.putExtra(USER_KEY,userItem.user.username)
+                    intent.putExtra(USER_KEY, userItem.user)
+                    startActivity(intent)
+                    finish()
 
                 }
 
@@ -93,7 +112,7 @@ class NewMessageActivity : AppCompatActivity() {
 }
 
 
-class  UserItem(val user:RegisterActivity.User):Item<GroupieViewHolder>(){
+class  UserItem(val user:User):Item<GroupieViewHolder>(){
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 

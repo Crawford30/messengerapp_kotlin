@@ -1,14 +1,16 @@
-package com.example.messenger
+package com.example.messenger.registerlogin
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import com.example.messenger.R
+import com.example.messenger.messages.LatestMessagesActivity
+import com.example.messenger.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -208,10 +210,10 @@ var selectedPhotoUri: Uri? = null  //global variable, because we need to access 
 
 
 
-    ///===Class user ===
-    class User(val uid: String, val username:String, val profileImageUrl:String) {
-        constructor():this("","","") //solves no argument constructor error
-    }
+//    ///===Class user ===
+//    class User(val uid: String, val username:String, val profileImageUrl:String) {
+//        constructor():this("","","") //solves no argument constructor error
+//    }
 
 
 }
