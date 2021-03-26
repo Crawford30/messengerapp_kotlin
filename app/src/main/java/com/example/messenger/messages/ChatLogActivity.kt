@@ -165,6 +165,9 @@ class ChatLogActivity : AppCompatActivity() {
         val toReference = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push() //to push will generate automatic node for us in rtd
 
 
+
+
+
         val chatMessage = ChatMessage(reference.key!!, textMessage, fromId, toId!!, System.currentTimeMillis()/1000)
         //2. Access the reference and set some value
         reference.setValue(chatMessage).
@@ -183,6 +186,16 @@ class ChatLogActivity : AppCompatActivity() {
 
 
         toReference.setValue(chatMessage)
+
+        val latestMessageRef = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId/$toId").push() //to push will generate automatic node for us in rtd
+        latestMessageRef.setValue(chatMessage)
+
+
+
+        val latestMessageToRef = FirebaseDatabase.getInstance().getReference("/latest-messages/$toId/$fromId").push() //to push will generate automatic node for us in rtd
+        latestMessageToRef.setValue(chatMessage)
+
+
     }
 
 
