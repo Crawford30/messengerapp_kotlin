@@ -68,10 +68,16 @@ class ChatLogActivity : AppCompatActivity() {
 
 
     private fun listensForMessages() {
-        val ref = FirebaseDatabase.getInstance().getReference("/messages")
+       // val ref = FirebaseDatabase.getInstance().getReference("/messages")
+
+        val fromId = FirebaseAuth.getInstance().uid
+        val toId = toUser?.uid
+
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId")
 
 
-            //Its more real time when we use  addChildEventListener
+
+        //Its more real time when we use  addChildEventListener
         ref.addChildEventListener(object: ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
 
@@ -150,14 +156,33 @@ class ChatLogActivity : AppCompatActivity() {
         //====How do we send message to firebase
 
         //1. get firebase reference
-        val reference = FirebaseDatabase.getInstance().getReference("/messages").push() //to push will generate automatic node for us in rtd
+      //  val reference = FirebaseDatabase.getInstance().getReference("/messages").push() //to push will generate automatic node for us in rtd
+
+
+        val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push() //to push will generate automatic node for us in rtd
+
+
+        val toReference = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push() //to push will generate automatic node for us in rtd
+
 
         val chatMessage = ChatMessage(reference.key!!, textMessage, fromId, toId!!, System.currentTimeMillis()/1000)
         //2. Access the reference and set some value
         reference.setValue(chatMessage).
                 addOnSuccessListener {
                     Log.d(TAG, "Our Chat Message Saved Successfully: ${reference.key}")
+
+                    //-=====clear the text after send tapped===
+
+                    edit_text_chat_log.text.clear()
+
+                    //========go to the last message after hitting send
+
+                    recyclerview_chat_log.scrollToPosition(adapter.itemCount - 1)
+
                 }
+
+
+        toReference.setValue(chatMessage)
     }
 
 

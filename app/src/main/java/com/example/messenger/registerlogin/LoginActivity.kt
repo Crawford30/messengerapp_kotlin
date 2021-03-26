@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.messenger.R
+import com.example.messenger.messages.LatestMessagesActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -56,6 +57,14 @@ class LoginActivity: AppCompatActivity() {
                     if (!it.isSuccessful) return@addOnCompleteListener
                     //======else===
                     Log.d("Login", "successfully created user with the UId: ${it.result?.user?.uid}")
+
+
+                    val intent = Intent(this, LatestMessagesActivity::class.java)
+
+                    //clear all activities on the stack
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+
                 }
                 .addOnFailureListener {
                     Log.d("Login", "Failed to Login ${it.message}")
