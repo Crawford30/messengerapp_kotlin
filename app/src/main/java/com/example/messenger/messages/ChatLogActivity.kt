@@ -77,8 +77,22 @@ class ChatLogActivity : AppCompatActivity() {
 
                     Log.d(TAG, chatMessage?.text)
 
-                    //====add objects inside adapter
-                    adapter.add(ChatFromItem(chatMessage.text))
+//                    //====add objects inside adapter
+//                    adapter.add(ChatFromItem(chatMessage.text))
+
+                    //====check for fromid and toId to know which layout to present
+
+                    if(chatMessage.fromId == FirebaseAuth.getInstance().uid) {
+
+                        //====add objects inside adapter
+                        adapter.add(ChatFromItem(chatMessage.text))
+
+                    } else {
+
+                        //we use toitem
+                        adapter.add(ChatToItem(chatMessage.text))
+
+                    }
 
                 }
 
