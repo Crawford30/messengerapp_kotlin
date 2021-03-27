@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.messages.ChatLogActivity
 import com.example.messenger.models.User
+import com.example.messenger.models.UserItem
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -112,29 +113,7 @@ class NewMessageActivity : AppCompatActivity() {
 }
 
 
-class  UserItem(val user:User):Item<GroupieViewHolder>(){
 
-    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-
-        viewHolder.itemView.user_name_textview_new_message.text = user.username
-
-        //will be called in our list for user object
-
-        //====load image
-
-        Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.imageview_new_message)
-
-    }
-
-    override fun getLayout(): Int {
-
-        return R.layout.user_row_new_message
-
-    }
-
-
-
-}
 
 
 
