@@ -111,6 +111,9 @@ class ChatLogActivity : AppCompatActivity() {
 
                 }
 
+                //======Scroll to the top
+                recyclerview_chat_log.scrollToPosition(adapter.itemCount - 1)
+
 
             }
 
